@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f4f7;
+            margin: 0;
+        }
+
+        .header {
+            background: #222;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #bbb;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eee;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error {
+            margin-top: 25px;
+            padding: 15px;
+            background: #ffe5e5;
+            color: #b00000;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .info {
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Fraud Detection System</h1>
+        <p>Transaction Risk Detection System</p>
+    </div>
+
+    <div class="box">
+
+        <h2>Check Transaction</h2>
+
+        <p class="info">
+            Enter transaction details below
+        </p>
+
+        <form method="POST">
+
+            <label>Transaction Amount</label>
+            <input type="number" name="amount" step="any" required>
+
+            <label>Number of Transactions</label>
+            <input type="number" name="transactions" required>
+
+            <label>Previous Fraud (0 or 1)</label>
+            <input type="number" name="previous_fraud" min="0" max="1" required>
+
+            <label>Distance</label>
+            <input type="number" name="distance" step="any" min="0" required>
+
+            <button type="submit">
+                Check Transaction
+            </button>
+
+        </form>
+
+        {% if result %}
+        <div class="result">
+            {{ result }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
