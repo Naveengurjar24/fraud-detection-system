@@ -33,49 +33,28 @@ def home():
                 error = "Distance cannot be negative."
 
             else:
-
-                data = [[
-                    amount,
-                    transactions,
-                    previous_fraud,
-                    distance
-                ]]
+                data = [[amount, transactions, previous_fraud, distance]]
 
                 prediction = model.predict(data)[0]
-
                 probability = model.predict_proba(data)[0][1] * 100
 
                 if probability >= 70:
                     risk = "HIGH"
-
                 elif probability >= 40:
                     risk = "MEDIUM"
-
                 else:
                     risk = "LOW"
 
                 if prediction == 1:
-                    result = (
-                        f"FRAUD | Probability: "
-                        f"{probability:.1f}% | Risk: {risk}"
-                    )
+                    result = f"FRAUD | Probability: {probability:.1f}% | Risk: {risk}"
                 else:
-                    result = (
-                        f"NORMAL | Probability: "
-                        f"{probability:.1f}% | Risk: {risk}"
-                    )
+                    result = f"NORMAL | Probability: {probability:.1f}% | Risk: {risk}"
 
         except ValueError:
             error = "Please enter valid numbers."
 
-    return render_template(
-        "index.html",
-        result=result,
-        error=error
-    )
+    return render_template("index.html", result=result, error=error)
 
-
-app.run(debug=True)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
